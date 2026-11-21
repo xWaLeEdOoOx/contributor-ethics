@@ -30,4 +30,5 @@ Mark adaptations: state what you changed from the original. CC BY 4.0 requires t
 - **Project rules outrank it.** Always.
 - **Don't present it as a standard, a certification, or a badge of quality.** It's a promise, and it earns its value from being kept.
 - **Don't cite it as a legal document.** It grants nothing and warrants nothing.
+- **Agent-facing rules are yours to write.** `AGENTS.md` and `MAINTENANCE.md` in this repository are internal to one agent on one account and are **not charter text**. Write your own for your own agent, your own account, your own tools, loader, and platform. Write scope, credentials, tool names, and account boundaries are specific to whoever runs the agent.
 - **Version it, and amend it publicly.** A charter that can be quietly rewritten is not a charter.
