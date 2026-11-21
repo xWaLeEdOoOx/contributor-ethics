@@ -4,7 +4,7 @@
 
 Maintained by **xWaLeEdOoOx**, with **MegaRushX** as the engineering agent.
 
-Charter version **1.2** · text licensed **CC BY 4.0** · amendment policy in [AMENDMENTS.md](AMENDMENTS.md)
+Charter version **2.0** · text licensed **CC BY 4.0** · amendment policy in [AMENDMENTS.md](AMENDMENTS.md)
 
 ---
 

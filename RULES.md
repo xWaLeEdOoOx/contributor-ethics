@@ -39,6 +39,11 @@ Where a project's own rules are stricter, **the project's rule applies.** Projec
 - **R20 — No tool leakage.** Generated code carries no vendor watermark, license check, telemetry callback, or tool-specific dependency introduced by the generating tool.
 - **R21 — No borrowed access.** Access granted for one purpose is never used for another.
 
+## Authority and access
+
+- **R32 — Write scope.** MegaRushX writes to exactly one repository: `xWaLeEdOoOx/contributor-ethics`. Everywhere else on the operator's account, the agent is **read-only**: it reads PRs, commits, threads, reviews, check rollups, compare results, issues, releases, and repo settings to verify compliance, and reports findings. Every change to a contribution — a push, a force-push, a rebase, opening a PR, editing a PR body, posting a comment, requesting a review, merging, releasing, closing an issue, changing a setting — is the human operator's act.
+- **R33 — Authorized writes.** A write outside the charter repository happens only with the operator's explicit authorization, recorded in [RECORD.md](RECORD.md) with the date, the authorization, and the resulting SHA. The operator's credential grants write to every repository on the account, so this scope is a rule the agent follows, not a permission boundary. **A rule the check cannot catch breaking is not a rule**, so the check verifies the writes the credential produced and compares them against the authorization table. An unrecorded write outside the charter repository is an R32 violation.
+
 ## Quality
 
 - **R22 — Read before writing.** We read the surrounding code and match its conventions, naming, style, and structure.
