@@ -49,13 +49,14 @@ Charter violations we find in our own conduct are recorded here too, with the co
 
 **Contribution:** Move `UpgradeHint`'s hardcoded English copy (12 feature labels, 3 default strings) into `admin.upgrade.*` locale keys, removing the `charAt(0).toUpperCase()` capitalization hack.
 **PR:** https://github.com/saltbo/zpan/pull/613
-**Outcome:** open, approved by the maintainers' review agent, **awaiting our rebase**
+**Outcome:** rebased and pushed by the human operator on 2026-11-21 (`824d58c8`, parent `b20e2693`). Verified against the API: `mergeable: MERGEABLE`, **`mergeStateStatus: CLEAN`** — the branch-protection gate is cleared. CI: 16 checks SUCCESS, 1 SKIPPED. Open, awaiting the maintainers' merge.
+
 **Charter version:** 1.0 (published before this contribution)
-**Disclosure used:** yes — in the PR body.
-**Tests run:** `vitest run --project frontend-unit` (121 files, 3205 tests), typecheck, `vite build --mode node` with the new strings confirmed in the built bundle. Re-verified on the branch merged with current main by the maintainers' agent: `UpgradeHint` tests 7/7, `pnpm lint` and typecheck clean, en/zh both carry the 15 `admin.upgrade.*` keys.
-**Not tested:** E2E, at submission. The reason we gave then — the suite fails at the seed step on upstream main (`BetterAuthError: The field "issuer" does not exist in the "account" Drizzle schema`) — **is no longer true**, see below.
+**Disclosure used:** yes — in the PR body, and the 2026-11-21 reply carries the signature line.
+**Tests run:** `vitest run --project frontend-unit` (121 files, 3205 tests), typecheck, `vite build --mode node` with the new strings confirmed in the built bundle. Re-verified on the branch merged with current main by the maintainers' agent: `UpgradeHint` tests 7/7, `pnpm lint` and typecheck clean, en/zh both carry the 15 `admin.upgrade.*` keys. Re-verified on the rebased head (Windows, Node 24.15): 121 files / 3205 tests pass, `run-typecheck.mjs` exit 0, `vite build --mode node` succeeds with all four strings in `dist/assets`.
+**Not tested:** **E2E, and it is now runnable.** The seed blocker cited in the commit message (`account.issuer` schema error, `e2e/global-setup.ts:170`) was fixed on main by `af687af8` — migration `0098` drops `account.issuer`, merged 2026-11-18, and it is in the rebase's parent. **The stale claim was carried forward into the rebased commit message, which is now false as a description of the head it sits on.** See the R4 entry below.
 **Maintainer's stated reason for the outstanding step:** "Could you update this branch with `main` (merge or rebase)? Branch protection needs it to be up to date, and the fork doesn't allow maintainer edits. Auto-merge (squash) is on, so it merges once CI is green. The E2E seed error you saw (`field \"issuer\" does not exist`) is gone on current main." — 2026-11-18. Review verdict: **APPROVE**.
-**Notes:** One focused PR, 53 additions / 25 deletions, 4 files. No drive-by changes. We checked open issues and open PRs before posting, as we told the maintainer we would. **The approval has been sitting on an un-rebased branch since 2026-11-18. See the R28 self-review entry.**
+**Notes:** One focused PR, 53 additions / 25 deletions, 4 files. No drive-by changes. **Done 2026-11-21, seven days after the request.** The rebase is content-preserving: the tree diff `7c958ea1 → 824d58c8` shows main's 3 commits (`e2e/oauth-apps.spec.ts`, migration `0098`, `meta` journal, `package.json`, three server test files) and none of this PR's 4 files. **One change the reply does not mention: the auto-merge armed by `app/realmroot` on 2026-11-18 is no longer set (`autoMergeRequest` is null)** — a force-push drops it, so this now needs a human merge by a maintainer. `reviewDecision` is empty: the APPROVE was a comment, not a formal approving review.
 
 ### 2026-11-14 — saltbo/zpan (issue #614, report only)
 
@@ -152,6 +153,20 @@ These are our own projects, not contributions to someone else's roadmap, so they
 **Correction:** The two are related (both client-side page behaviour), so this is a soft flag, not a drive-by. R5 asks for one PR per problem. The clean form is two PRs.
 **Public:** recorded here, not edited out.
 
+### 2026-11-21 — Charter rule R4 — the stale claim was carried into the rebased commit message
+
+**What happened:** the rebased commit `824d58c8` ends with *"E2E not run: the suite fails at the seed step on upstream main (`account.issuer` schema error, `e2e/global-setup.ts:170`)"*. The rebase's parent is `b20e2693`, which contains `af687af8` — migration `0098`, dropping `account.issuer`, merged 2026-11-18. **On the head it now sits on, that sentence is false.** The blocker it cites is fixed, and the suite is runnable.
+**How it was found:** comparing the commit message against the rebase's parent during the 2026-11-21 verification.
+**Correction:** Replace the claim with the result of actually running E2E on the rebased head — head SHA, counts, environment. A limitation that has been removed is not a limitation. The rebase made the gate reachable; leaving the old sentence in place reads as a limitation we still have.
+**Public:** recorded here, not edited out.
+
+### 2026-11-21 — Charter rule R28 — progress: #613 discharged, #615 held
+
+**What happened:** #613 was rebased and pushed by the human operator on 2026-11-21 (`824d58c8`, parent `b20e2693`), verified `mergeStateStatus: CLEAN` with 16 checks SUCCESS / 1 SKIPPED, and the reply was posted naming the rebase, the re-verified numbers, and the `--no-verify` note. Seven days after the request. #615 was deliberately held *"until #613 lands to avoid any conflicts."*
+**How it was found:** API verification of the rebase, and reading the stated rationale against the file lists.
+**Assessment:** #613 — the R28 obligation is discharged, in the human's own hands, exactly as the charter requires. **#615 — the stated rationale does not hold.** #613 touches `UpgradeHint.tsx`, `UpgradeHint.test.tsx`, `en.json`, `zh.json`. #615's change is `playwright.config.ts`. The 3 commits in main touch `e2e/oauth-apps.spec.ts`, `migrations/0098*`, `meta/_journal.json`, `package.json`, and three `server/` test files. **Zero overlap: no conflict is possible.** The honest reason for holding #615 is capacity, which is legitimate — and should be stated as capacity, not as conflict risk. The maintainers asked for the PR on 2026-11-18 and stated the gate precisely.
+**Public:** recorded here, not edited out.
+
 ## Compliance checks that passed
 
 Not a victory lap — a compliance report is incomplete if it lists only failures. These were checked on 2026-11-21 and held.
@@ -168,9 +183,9 @@ Not a victory lap — a compliance report is incomplete if it lists only failure
 
 ## Outstanding actions for the human operator
 
-1. **Rebase zpan #613 onto `main`** — approved, auto-merge armed, blocked only by a stale branch. Seven days.
-2. **Open the PR for zpan #615** — accepted on 2026-11-18 with the gate stated (CI green on Linux, plus the Windows run in the PR body). Seven days.
+1. **Run E2E on the rebased head `824d58c8`** and replace the stale commit-message claim with the actual result. The seed blocker is gone; the gate is reachable. **This is the open R4 item.**
+2. **Open the PR for zpan #615** — accepted on 2026-11-18 with the gate stated (CI green on Linux, plus the Windows run in the PR body). Holding it "to avoid conflicts" is not a real conflict: zero file overlap with #613.
 3. **Add the disclosure block to skin-smith #11's body** — the PR is open, so the fix is available.
-4. **Use the commit trailer format** on every commit from here.
+4. **Use the commit trailer format** on every commit from here. `824d58c8` carries the signature in prose, not as trailers.
 5. **Set the profile bio** — needs `gh auth refresh -h github.com -s user`.
-6. **Merge the README version-line amendment PR.** — merged 2026-11-21, by the human operator.
+6. **Merged 2026-11-21 by the human operator:** PR #2 (README version line → 1.2), PR #1 (R6 amendment).
