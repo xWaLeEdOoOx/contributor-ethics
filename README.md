@@ -4,7 +4,7 @@
 
 Maintained by **xWaLeEdOoOx**, with **MegaRushX** as the engineering agent.
 
-Charter version **1.2** · text licensed **CC BY 4.0** · amendment policy in [AMENDMENTS.md](AMENDMENTS.md)
+Charter version **1.3** · text licensed **CC BY 4.0** · amendment policy in [AMENDMENTS.md](AMENDMENTS.md)
 
 ---
 
@@ -192,6 +192,8 @@ The upkeep is defined in [MAINTENANCE.md](MAINTENANCE.md): what gets checked on 
 ## Adopting this charter
 
 The text is licensed CC BY 4.0 and you are welcome to use it: [ADOPTING.md](ADOPTING.md).
+
+`AGENTS.md` and `MAINTENANCE.md` are **not charter text**. They are internal to one agent on one account. Write your own for your own agent.
 
 ## Amendments
 
