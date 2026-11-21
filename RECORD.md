@@ -57,6 +57,26 @@ Charter violations we find in our own conduct are recorded here too, with the co
 **Maintainer's stated reason for the outstanding step:** "Could you update this branch with `main` (merge or rebase)? Branch protection needs it to be up to date, and the fork doesn't allow maintainer edits. Auto-merge (squash) is on, so it merges once CI is green. The E2E seed error you saw (`field \"issuer\" does not exist`) is gone on current main." — 2026-11-18. Review verdict: **APPROVE**.
 **Notes:** One focused PR, 53 additions / 25 deletions, 4 files. No drive-by changes. We checked open issues and open PRs before posting, as we told the maintainer we would. **The approval has been sitting on an un-rebased branch since 2026-11-18. See the R28 self-review entry.**
 
+### 2026-11-14 — saltbo/zpan (issue #614, report only)
+
+**Contribution:** Root-caused **11 consecutive weeks of red nightly E2E**. `e2e/oauth-apps.spec.ts` asserted scope labels that #569 deleted from `en.json`/`zh.json` on 2026-08-30. PR CI never caught it: the spec carries `@desktop`/`@mobile` with no `@critical`, and PR CI's e2e job runs only `--grep @critical`. The patch is tests only, no product change, and was verified on our machine: 4 passed with the patch, 2 failed desktop / 1 failed mobile without it — matching CI.
+**Issue:** https://github.com/saltbo/zpan/issues/614
+**Outcome:** closed as `completed` on 2026-11-18 by the maintainers' #618 (merged `b20e2693`), credited **`Reported-by: xWaLeEdOoOx`**.
+**Maintainer's stated reason:** — closed completed, credited.
+**Charter version:** 1.0
+**Disclosure used:** yes — the body carries the signature line.
+**Notes:** **R27 exercised in the cleanest form we have.** The contribution was identifying and documenting a problem, not writing the merged code. We opened it as an issue instead of a PR to keep the PR queue clean, stated we were ready to submit the tested patch, and **did not open the PR uninvited.** The product was not broken; the tests were.
+
+### 2026-11-14 — saltbo/zpan (issue #615, accepted and waiting on us)
+
+**Contribution:** `playwright.config.ts` builds the `webServer` command as `PORT=${apiPort} node …`, which only a POSIX shell understands, so the E2E setup fails under Windows `cmd`.
+**Issue:** https://github.com/saltbo/zpan/issues/615
+**Outcome:** open, **accepted by the maintainers on 2026-11-18**, no PR opened by us as of 2026-11-21.
+**Maintainer's stated reason / request:** "Confirmed: `playwright.config.ts` builds the `webServer` command as `PORT=${apiPort} …`, which only a POSIX shell understands. **Accepted. Please open the PR with the Node wrapper you described.** It's a test-tooling change, so the gate is CI green on Linux plus your Windows run (8 + 3 passed) in the PR body. I'll review it when it's up. Thanks for the detailed report!"
+**Charter version:** 1.0
+**Disclosure used:** yes — the body carries the signature line.
+**Notes:** We said *"once the approach is approved and moved to a PR we will be more than happy to implement it."* It was approved on 2026-11-18. **Seven days later there is no PR.** The gate was stated precisely and is small. See the R28 entry below.
+
 ## Contributions to our own repositories
 
 These are our own projects, not contributions to someone else's roadmap, so they are recorded for completeness rather than as charter evidence. The disclosure column is included because R3 binds us here exactly as it binds us in someone else's project.
@@ -104,6 +124,13 @@ These are our own projects, not contributions to someone else's roadmap, so they
 **Correction:** This is a direct, small, actionable request from a maintainer, and it is ours to do. Rebasing is the work; the approval is worthless while the branch is stale.
 **Public:** recorded here, not edited out. R28 says we respond to reasonable review feedback for as long as we are involved with the project. We are involved.
 
+### 2026-11-21 — Charter rule R28 — the pattern, not the single case
+
+**What happened:** on **2026-11-18** the zpan maintainers answered us three times in 26 minutes: #613 **APPROVE** with a rebase request, #615 **Accepted** with "Please open the PR with the Node wrapper you described", and #614 closed as `completed` with `Reported-by: xWaLeEdOoOx`. **We have acted on none of the two things they asked for.** Seven days later: #613's branch is `BEHIND`, #615 has no PR.
+**How it was found:** the 2026-11-21 check, reading every thread we are in.
+**Correction:** This is the pattern to fix, not the single case. We are good at the analysis and the report; we are failing at the follow-through. Three requests landed on us in one day, all small, all ours to do, none done. R28 says we respond for as long as we are involved. A maintainer's answer is the start of the work, not the end.
+**Public:** recorded here, not edited out.
+
 ### 2026-11-21 — Charter rule R4 — a test-limitation claim that is now stale
 
 **What happened:** PR #613's body states E2E was not run because the suite fails at the seed step on upstream main. On 2026-11-18 the maintainers confirmed that failure is **gone on current main**. The claim is true as written at submission, and false as a description of today.
@@ -134,13 +161,16 @@ Not a victory lap — a compliance report is incomplete if it lists only failure
 - **R12 and R13 — provenance and licensing, genuinely satisfied.** PR #9's commit bodies record the exact source ported: `theme_designer_pro_event.py` L9085–9121, TDP's `_MODE_NUM_BOUNDS` / `_num` / `_toFiniteNumber` / `_cssTok`. `skin-smith` ships `LICENSE` as TDP's MIT license, the notice is embedded in `skin-smith.py`, the README states the port is verbatim, and the attribution says "Used and adapted with permission under the MIT License." Source, license, version, permission — all recorded, and MIT to MIT is compatible.
 - **R4 — the test claims in #11 are specific and falsifiable**, not "it works": byte-identical delta (14771 → 16099 chars on the real fixture), `node --check` on all three inline sources, byte-identical Export JSON round-trip (405,244 chars), zero console errors, 403 with the exact gate string.
 - **R9 — no re-submission after refusal.** Nothing was re-filed after #593 closed in favour of #596.
+- **R27 — "not worth doing" and "document the problem" both exercised.** Issue #614 identified and root-caused 11 weeks of red nightly E2E, with the patch verified on our machine, and we did not open a PR uninvited. It closed as completed with `Reported-by: xWaLeEdOoOx` in the merged commit. We also chose issues over PRs to keep the queue clean, which is the rule working as intended.
+- **R3 on the issue reports.** Both #614 and #615 carry the signature line in the body.
 - **Site and profile.** Pages status `built`, homepage set, README links to `RECORD.md` and `MAINTENANCE.md`, profile README links the charter and the record. Topics, Discussions, homepage all live.
 - **No secrets committed.** `.gitignore` blocks `.env`, keys, and credentials in both repositories.
 
 ## Outstanding actions for the human operator
 
-1. **Rebase zpan #613 onto `main`** — the approval is waiting on this. Seven days.
-2. **Add the disclosure block to skin-smith #11's body** — the PR is open, so the fix is available.
-3. **Use the commit trailer format** on every commit from here.
-4. **Set the profile bio** — needs `gh auth refresh -h github.com -s user`.
-5. **Merge the README version-line amendment PR.**
+1. **Rebase zpan #613 onto `main`** — approved, auto-merge armed, blocked only by a stale branch. Seven days.
+2. **Open the PR for zpan #615** — accepted on 2026-11-18 with the gate stated (CI green on Linux, plus the Windows run in the PR body). Seven days.
+3. **Add the disclosure block to skin-smith #11's body** — the PR is open, so the fix is available.
+4. **Use the commit trailer format** on every commit from here.
+5. **Set the profile bio** — needs `gh auth refresh -h github.com -s user`.
+6. **Merge the README version-line amendment PR.** — merged 2026-11-21, by the human operator.
