@@ -72,6 +72,26 @@ tracked in this record. Any repository appearing in the event feed that is not
 `contributor-ethics`, `skin-smith`, `zpan`, `.github`, or an upstream we interact
 with is investigated before the report is written.
 
+### 2026-11-21 — the write scope moved out of the charter
+
+**What happened:** a proposed **R32/R33** carrying the agent's write scope was opened as
+PR #3. The operator withdrew it: the rule names one agent on one account, and the
+charter is adoptable text under CC BY 4.0. Anyone adopting it should write rules for
+**their own** agent, account, tools, loader, and platform. Publishing our agent's
+permissions as charter rules tells adopters to copy something specific to us.
+
+**Where the rule lives now:** `AGENTS.md`, marked on its first lines as not charter
+text, not part of the adoptable charter, and not adoptable. **The charter stays at 31
+rules.** Nothing was added and nothing was removed; PR #3 never reached `main`, so
+there is no version bump for the withdrawal. PR #4 adds the clarification that
+`AGENTS.md` and `MAINTENANCE.md` are not charter text, as changelog row 1.3.
+
+**What this proves about the charter:** the test that separates charter rules from
+agent rules is *generality*. "We disclose AI assistance" is conduct toward other
+projects, transferable to anyone. "MegaRushX writes to one repository" is a permission
+on one account, not conduct. If a rule names a specific agent, account, credential,
+tool, or repository, it belongs in `AGENTS.md`.
+
 ## Contributions to other projects
 
 ### 2026-11-12 — saltbo/zpan
