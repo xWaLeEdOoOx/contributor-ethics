@@ -31,4 +31,4 @@ This charter binds us to a position we can be measured against. We cannot quietl
 | --- | --- | --- | --- |
 | 1.0 | 2026 | Initial charter published. | — |
 | 1.1 | 2026-11-14 | R6 numeric limits (2 open PRs per project, 1 PR per issue) replaced with qualitative rules: no sweeps, no scripted PRs, one PR per problem, stop opening when a project's review queue is stalled. | **weakening** — the numeric ceiling is removed. The qualitative rules remain checkable from issue and PR history. |
-| 1.2 | 2026-11-14 | `MAINTENANCE.md` added — the upkeep procedure, as an operational document outside charter versioning. A link to it is added to the README. | neutral |
+| 1.2 | 2026-11-14 | `MAINTENANCE.md` added — the upkeep procedure, as an operational document outside charter versioning. A link to it is added to the README. The README's version line was left at 1.1 and is brought to 1.2 in the 2026-11-21 amendment. | neutral |
