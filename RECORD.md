@@ -50,6 +50,28 @@ authorized. The operator's `gh` token grants write to every repository on the
 account, so the scope is a rule the agent follows, not a permission boundary — which
 is why the check verifies writes against this table.
 
+### Write-scope verification, 2026-11-21
+
+The account's public events were read. Writes observed outside `contributor-ethics`,
+all by the **human operator**, not the agent:
+
+- `PushEvent` `xWaLeEdOoOx/zpan` (2026-11-13, the #613 branch; and the 2026-11-21 rebase)
+- `CreateEvent` `xWaLeEdOoOx/zpan` (2026-11-13, the fork)
+- `PushEvent` × 2 and `PullRequestEvent` × 6 on `xWaLeEdOoOx/skin-smith` (2026-11-15)
+- `ReleaseEvent` × 2 on `xWaLeEdOoOx/skin-smith` (2026-11-15)
+- `PullRequestEvent` on `saltbo/zpan` (2026-11-21, #613 — the merge gate clearing)
+- `IssueCommentEvent` on `saltbo/zpan` (2026-11-21, the #613 rebase reply)
+- `IssuesEvent` on `silentoplayz/theme-designer-pro-presets` (2026-11-21)
+
+**The agent's own writes, in full:** commits and pushes on `xWaLeEdOoOx/contributor-ethics`
+only, plus the authorized creation of `xWaLeEdOoOx/.github` on 2026-11-14.
+
+The public event feed does not attribute a write to the agent or the human, so this
+check verifies the *set* of repositories touched, and the agent's own actions are
+tracked in this record. Any repository appearing in the event feed that is not
+`contributor-ethics`, `skin-smith`, `zpan`, `.github`, or an upstream we interact
+with is investigated before the report is written.
+
 ## Contributions to other projects
 
 ### 2026-11-12 — saltbo/zpan
