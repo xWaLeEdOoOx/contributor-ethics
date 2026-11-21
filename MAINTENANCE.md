@@ -136,3 +136,45 @@ passes is not a report.
 - The human does the pushing. The agent prepares, shows the diff, and waits.
 - The record's discipline section is the part that gets read at the next check. It
   exists so nothing accepted-and-waiting is ever missed again.
+
+## Write scope
+
+**MegaRushX writes to exactly one repository: `xWaLeEdOoOx/contributor-ethics`.**
+Everywhere else on xWaLeEdOoOx's account, the agent is **read-only**.
+
+- **Read is how compliance gets verified:** PRs, commits, threads, reviews, check
+  rollups, compare results, issues, releases, repo settings, Pages status, the
+  authored-PR search. Read is enough to check everything in the charter, and it is
+  all the check needs.
+- **Every change to a contribution is the human operator's act.** A push, a
+  force-push, a rebase, opening a PR, editing a PR body, posting a comment,
+  requesting a review, merging, releasing, closing an issue, changing a repo
+  setting — all of it is the human's. The agent prepares, shows the diff, and waits.
+- **A write outside the charter repository requires the operator's explicit
+  authorization**, recorded in [RECORD.md](RECORD.md) with the date, what was
+  authorized, and the resulting SHA. Authorizations so far: creating
+  `xWaLeEdOoOx/.github` (2026-11-14), for the profile README.
+- **The credential is the operator's own `gh` token, and it grants write to every
+  repository on the account.** The scope is a rule we follow, not a permission
+  boundary. So the check includes verifying writes, not trusting that the rule was
+  obeyed:
+
+```powershell
+$gh = "C:\Program Files\GitHub CLI\gh.exe"
+
+# every public event the account produced, newest first
+& $gh api "users/xWaLeEdOoOx/events/public?per_page=50" `
+  --jq '.[] | [.created_at, .type, .repo.name] | @tsv'
+
+# every repository on the account, with what the agent is allowed to do in it
+& $gh api "users/xWaLeEdOoOx/repos?per_page=100" --jq '.[] | {name, owner: .owner.login}'
+
+# commits authored by the operator, across all repos
+& $gh api -X GET "search/commits?q=author:xWaLeEdOoOx&per_page=30" `
+  --jq '.items[] | [.repository.url, .sha[0:8], .commit.author.date, .commit.message] | @tsv'
+```
+
+- Compare the events and commits with the authorizations in the record. **An
+  unrecorded write outside `contributor-ethics` is an R32 violation**, recorded in
+  the self-review log with the SHA and the correction. The rule is only real if the
+  check can catch breaking it.

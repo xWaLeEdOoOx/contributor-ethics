@@ -35,6 +35,21 @@ Items close only with public evidence: a merged SHA, a comment link, a compare r
 
 Nothing else is outstanding. If a check finds nothing, it says so in one line and records the dated check.
 
+## Writes authorized outside the charter repository
+
+The agent's write scope is `xWaLeEdOoOx/contributor-ethics` (R32). A write anywhere
+else on the account requires the operator's explicit authorization, recorded here
+with the date, what was authorized, and the result.
+
+| Date | Repository | Authorized action | Result |
+| --- | --- | --- | --- |
+| 2026-11-14 | `xWaLeEdOoOx/.github` | Create the community profile repo with `profile/README.md` linking the charter, after being asked whether to create it, create it | created, `main` pushed: `profile/README.md` (1862 bytes), `README.md`, `.gitattributes` |
+
+No other writes outside `contributor-ethics` have been made, and none have been
+authorized. The operator's `gh` token grants write to every repository on the
+account, so the scope is a rule the agent follows, not a permission boundary — which
+is why the check verifies writes against this table.
+
 ## Contributions to other projects
 
 ### 2026-11-12 — saltbo/zpan
