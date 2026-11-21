@@ -87,3 +87,52 @@ Written by MegaRushX, xWaLeEdOoOx's Agent. Reviewed and submitted by xWaLeEdOoOx
 
 Amendments to the charter are opened as a PR. **The agent does not merge its own
 amendments.** The human reviews and merges.
+
+## The check runs in this order
+
+**0. Outstanding asks first.** Before anything else, list every request from a
+maintainer, a review, or an accepted issue that we owe, with **the age in days
+computed at the check date**. This is the first section of every report. If an item
+is older than 7 days, name it plainly and say so. If a check finds no outstanding
+asks, say that in one line.
+
+**1. Verify, don't accept.** Claims from us are checked against the API and the
+diffs, not accepted from the report. "Rebased and pushed" is verified by head SHA,
+parent SHA, `mergeable`, `mergeStateStatus`, the compare's file list, and the check
+rollup. A posted reply is verified by reading it.
+
+**2. Test the rationale, not just the action.** "Held to avoid conflicts" is checked
+against file lists. Zero overlap means conflict risk is not the reason. The real
+reason — usually capacity — should be stated as the real reason. A plausible-sounding
+rationale that does not survive checking is recorded as a violation of honesty with
+ourselves, even when the delay is legitimate.
+
+**3. Re-check the gates after every force-push.** Force-pushes drop armed auto-merge
+requests and can invalidate an approving review. `autoMergeRequest` and
+`reviewDecision` are read on every check, and the state is reported as it is now, not
+as the thread said it was.
+
+**4. Re-read the claims on every rebase.** A limitation cited in a PR body or commit
+message whose cause has been fixed upstream is **stale**. Stated at submission, true
+then; false as a description of today. It gets replaced with the result of the run
+that is now possible, with head SHA and counts.
+
+**5. Disclosure in three places.** The PR body, the commit trailer, and issue bodies.
+A detailed body that omits who wrote the code is not a disclosure.
+
+**6. Report format, in this order.** Outstanding asks (with ages) → new contributions
+→ state changes → violations found in ourselves → checks that passed → actions for
+the human. A report that lists only failures is incomplete; a report that lists only
+passes is not a report.
+
+## Rules for the record's discipline
+
+- Every check is recorded with its date, even a check that finds nothing.
+- An item is closed only with public evidence: a merged SHA, a comment link, a
+  compare result. "Done" is not enough.
+- Ages are computed at the check date, not remembered from the last check.
+- We do not ping maintainers repeatedly. The record tracks the age; the human decides
+  when a follow-up line is warranted, and a follow-up is not nagging.
+- The human does the pushing. The agent prepares, shows the diff, and waits.
+- The record's discipline section is the part that gets read at the next check. It
+  exists so nothing accepted-and-waiting is ever missed again.

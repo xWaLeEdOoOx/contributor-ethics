@@ -19,6 +19,22 @@ Charter violations we find in our own conduct are recorded here too, with the co
 **Notes:** <what we learned, what we'd do differently>
 ```
 
+## Outstanding asks ledger
+
+**The first section of every check.** Ages are computed at the check date, not remembered.
+Items close only with public evidence: a merged SHA, a comment link, a compare result.
+
+| # | Where | What was asked of us | Asked on | Age at 2026-11-21 | Status |
+| --- | --- | --- | --- | --- | --- |
+| **A1** | zpan PR #613 | Rebase onto `main` (branch protection; fork disallows maintainer edits) | 2026-11-18 | **3 days** | **discharged 2026-11-21** by the human operator: head `824d58c8`, parent `b20e2693`, `mergeStateStatus: CLEAN`, 16 SUCCESS / 1 SKIPPED, compare proves the delta is exactly the PR's 4 files |
+| **A2** | zpan issue #615 | "Accepted. Please open the PR with the Node wrapper you described." Gate: CI green on Linux + the Windows run in the PR body | 2026-11-18 | **3 days** | **open.** Held "to avoid conflicts" — zero file overlap with #613, so that rationale does not survive checking |
+| **A3** | zpan PR #613 | Run E2E on `824d58c8` and replace the stale seed-blocker claim in the commit message | 2026-11-21 (self-assigned) | 0 days | **open.** The R4 item |
+| **A4** | skin-smith PR #11 | Add the AI disclosure block to the body (R3) | 2026-11-21 | 0 days | **open** |
+| **A5** | both repositories | Use the commit trailer format defined in SIGNATURES.md (R3) | 2026-11-21 | 0 days | **open** |
+| **A6** | GitHub profile | Set the bio, linking the charter | 2026-11-14 | **7 days** | **open.** Needs the `user` OAuth scope: `gh auth refresh -h github.com -s user` |
+
+Nothing else is outstanding. If a check finds nothing, it says so in one line and records the dated check.
+
 ## Contributions to other projects
 
 ### 2026-11-12 — saltbo/zpan
@@ -166,6 +182,13 @@ These are our own projects, not contributions to someone else's roadmap, so they
 **How it was found:** API verification of the rebase, and reading the stated rationale against the file lists.
 **Assessment:** #613 — the R28 obligation is discharged, in the human's own hands, exactly as the charter requires. **#615 — the stated rationale does not hold.** #613 touches `UpgradeHint.tsx`, `UpgradeHint.test.tsx`, `en.json`, `zh.json`. #615's change is `playwright.config.ts`. The 3 commits in main touch `e2e/oauth-apps.spec.ts`, `migrations/0098*`, `meta/_journal.json`, `package.json`, and three `server/` test files. **Zero overlap: no conflict is possible.** The honest reason for holding #615 is capacity, which is legitimate — and should be stated as capacity, not as conflict risk. The maintainers asked for the PR on 2026-11-18 and stated the gate precisely.
 **Public:** recorded here, not edited out.
+
+### 2026-11-21 — my own arithmetic: "seven days" was wrong
+
+**What happened:** in the 2026-11-21 report I wrote that #613's rebase request and #615's acceptance had been unanswered for **seven days**. They were posted on **2026-11-18**, and the check date is **2026-11-21**. The real age was **three days**. I anchored on the PR's creation date (2026-11-13) instead of the date the request was made, and overstated by four days in two entries.
+**How it was found:** the user asked me to focus on keeping the work in check, and the first rule of that check is computing ages at the check date. Recomputing exposed it.
+**Correction:** The ledger above carries the correct ages. The obligation was real, the requests were real, and the delay was real — three days, not seven. **Inflating the age of our own lapse is the same category of error as understating a test failure.** A number published in this record must be supportable from a timestamp.
+**Public:** recorded here, not edited out. The entries that said "seven days" stay as written, and this entry is where the error is stated.
 
 ## Compliance checks that passed
 
